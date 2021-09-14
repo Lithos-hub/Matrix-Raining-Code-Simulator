@@ -1,4 +1,10 @@
-# matrix
+# Matrix Raining Code
+
+This is a simulation of the raining code from the Matrix movie using Vue.js
+
+Version 0.5.0
+
+* Working raining code animation (with bugs and some crashes).
 
 ## Project setup
 ```

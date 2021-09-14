@@ -1,4 +1,5 @@
 # Matrix Raining Code
+![logo](https://user-images.githubusercontent.com/57297760/133301511-f127dc44-0886-4c9f-ace0-c7c9aa6219a3.jpg)
 
 This is a simulation of the raining code from the Matrix movie using Vue.js
 

@@ -7,6 +7,10 @@ Version 0.5.0
 
 * Working raining code animation (with bugs and some crashes).
 
+Version 0.6.0
+
+* Added individual class to each character
+
 ## Project setup
 ```
 npm install

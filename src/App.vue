@@ -12,12 +12,12 @@ export default {
   name: "App",
   data() {
     return {
-      codeLength: 5000,
+      codeLength: 10,
       major: 0,
-      minor: 5,
+      minor: 6,
       patch: 0,
       counter: 0,
-      speedTypying: 50,
+      speedTypying: 100,
       greenCharList: [],
       numCols: [],
     };
@@ -54,67 +54,56 @@ export default {
     randomNumber(length) {
       return Math.floor(Math.random() * length);
     },
+    randomNumberRange(from, to) {
+      return Math.floor(Math.random() * (to - from + 1) + from);
+    },
     getMatrixCode() {
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < this.codeLength; i++) {
         this.greenCharList[i] = [];
         this.greenCharList[i].push(this.randomize());
       }
     },
     typeCode() {
       const CODE_ELEMENTS = document.querySelectorAll(".code");
-      CODE_ELEMENTS.forEach((element) => {
-        element.innerHTML = "";
-        element.style.position = "absolute";
-        element.style.left = `${this.randomNumber(1920)}px`;
-        element.style.top = `${this.randomNumber(1080)}px`;
-        let p = document.createElement("p");
-        element.appendChild(p);
-        setInterval(() => {
-          p.classList.add(".greenChar");
-          p.innerHTML += `
-          <p class="greenChar" style="animation: fadeOut 3s">${
-            this.greenCharList[this.randomNumber(100)]
-          }</p>
-        `;
-        }, this.speedTypying);
-      });
-
-      const GREEN_CHAR_ELEMENTS = document.querySelectorAll("p");
-      for (let i = 0; i < GREEN_CHAR_ELEMENTS.length; i++) {
-        setInterval(() => {
-          GREEN_CHAR_ELEMENTS[
-            this.randomNumber(GREEN_CHAR_ELEMENTS.length)
-          ].classList.add("fadeOut");
-        }, 500);
-      }
+      // const CHILD_NODES = CODE_ELEMENTS[0].childNodes;
+      const LENGTH = CODE_ELEMENTS.length;
       setInterval(() => {
-        const CODE_ELEMENTS = document.querySelectorAll(".code");
-        CODE_ELEMENTS.forEach((element) => {
-          element.innerHTML = "";
-          element.style.position = "absolute";
-          element.style.left = `${this.randomNumber(1920)}px`;
-          element.style.top = `${this.randomNumber(1080)}px`;
-          let p = document.createElement("p");
-          element.appendChild(p);
-          setInterval(() => {
-            p.classList.add(".greenChar");
-            p.innerHTML += `
-            <p class="greenChar" style="animation: fadeOut 3s">${
-              this.greenCharList[this.randomNumber(100)]
-            }</p>
-          `;
-          }, this.speedTypying);
-        });
-
-        const GREEN_CHAR_ELEMENTS = document.querySelectorAll("p");
-        for (let i = 0; i < GREEN_CHAR_ELEMENTS.length; i++) {
-          setInterval(() => {
-            GREEN_CHAR_ELEMENTS[
-              this.randomNumber(GREEN_CHAR_ELEMENTS.length)
-            ].classList.add("fadeOut");
-          }, 500);
+        for (let i = 0; i < LENGTH; i++) {
+          CODE_ELEMENTS[this.randomNumber(LENGTH)].style.position = "fixed";
+          CODE_ELEMENTS[
+            this.randomNumber(LENGTH)
+          ].style.fontSize = `${this.randomNumberRange(12, 28)}px`;
+          CODE_ELEMENTS[
+            this.randomNumber(LENGTH)
+          ].style.left = `${this.randomNumberRange(-100, 2000)}px`;
+          CODE_ELEMENTS[
+            this.randomNumber(LENGTH)
+          ].style.top = `${this.randomNumberRange(0, -500)}px`;
+          for (let j = 0; j < this.codeLength; j++) {
+            let p = document.createElement("p");
+            CODE_ELEMENTS[i].appendChild(p);
+            setInterval(() => {
+              p.classList.add("greenChar");
+              p.classList.add(`char-col-${i}-no-${j}`);
+              p.innerHTML = `
+            ${this.greenCharList[this.randomNumber(this.codeLength)]}
+        `;
+              let eachPara = document.querySelector(`.char-col-${i}-no-${j}`);
+              console.log(eachPara);
+              // TODO: TO CONTINUE
+            }, 1000);
+          }
         }
-        console.log("START");
+        // }, 4000);
+        // setInterval(() => {
+        //   const LENGTH = PARA_ELEMENTS.length;
+        //   for (let i = 0; i < LENGTH; i++) {
+        //     PARA_ELEMENTS[i].style.transition = "opacity 0.5s";
+        //     PARA_ELEMENTS[i].style.opacity = "0";
+        //     setTimeout(() => {
+        //       PARA_ELEMENTS[i].innerHTML = "";
+        //     }, 3000);
+        //   }
       }, 3000);
     },
   },
@@ -131,6 +120,11 @@ $cyan: #00ffff;
 @font-face {
   font-family: "Matrix";
   src: url("./assets/fonts/matrix.ttf") format("truetype");
+}
+
+.code {
+  position: relative;
+  width: auto;
 }
 
 #app {
@@ -159,41 +153,29 @@ $cyan: #00ffff;
   font-family: "Matrix";
 }
 
-.greenChar {
-  transition: all 2s;
-  display: block;
-  width: auto;
-  margin: 0 auto;
-  color: $green;
-  font-size: 25px;
+.firstChar {
+  margin: 0;
+  padding: 0;
+  color: $cyan;
   text-align: center;
   font-weight: bold;
 }
 
-.fadeOut {
-  transition: all 1s ease-in-out;
-  opacity: 0;
+.greenChar {
+  margin: 0;
+  padding: 0;
+  color: $green;
+  text-align: center;
+  font-weight: bold;
 }
 
-// ANIMATIONS
-
-@keyframes rain {
-  0% {
-    top: -5%;
-  }
-  100% {
-    top: 100%;
-  }
+.firstChar {
+  margin: 0;
+  padding: 0;
+  color: $cyan;
+  text-align: center;
+  font-weight: bold;
 }
-
-// @keyframes cyanToGreen {
-//   0% {
-//     color: $cyan;
-//   }
-//   100% {
-//     color: $green;
-//   }
-// }
 
 @keyframes fadeOut {
   0% {

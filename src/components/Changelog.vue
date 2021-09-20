@@ -31,6 +31,9 @@ export default {
         " ____________________ Version 0.8.0: ____________________  ",
         " The raining code is now an iterative component.",
         " Infinite behavior has been added to the raining animation.",
+        " ____________________ Version 0.8.5: ____________________  ",
+        " Improved the performance.",
+        " Added minor changes.",
       ],
     };
   },
@@ -63,7 +66,7 @@ export default {
           if (arrIndex <= totalLength) {
             p.classList.add("list-item");
             p.innerHTML += changes[arrIndex].charAt(charIndex);
-            setTimeout(type, 10);
+            setTimeout(type, 5);
           }
         }
       };
@@ -82,57 +85,6 @@ export default {
       };
       typeEachItem();
     },
-    // transformText() {
-    //   let changes = [];
-    //   let totalLength = 0;
-    //   for (let string of this.changeLogList) {
-    //     changes.push(string);
-    //     totalLength += string.length;
-    //   }
-    //   let major = 0;
-    //   let minor = 5;
-    //   let patch = 0;
-    //   let arrIndex = 0;
-    //   let charIndex = 0;
-    //   let p = document.createElement("p");
-    //   let version = document.createElement("h3");
-    //   version.classList.add("version-title");
-    //   let space = document.createElement("h2");
-    //   const CHANGELOG_LIST = document.querySelector(".changelog-list");
-    //   const type = (arrIndex, charIndex, major_number, minor_number, patch_number) => {
-    //     if (arrIndex < changes.length) {
-    //       if (arrIndex < totalLength) {
-    //         p.classList.add("list-item");
-    //         if (changes[arrIndex] === ` Version ${major_number}.${minor_number}.${patch_number}: `) {
-    //           version.innerHTML += changes[arrIndex].charAt(charIndex);
-    //         } else {
-    //           p.innerHTML += changes[arrIndex].charAt(charIndex);
-    //         }
-    //         setTimeout(type, 100);
-    //       }
-    //     }
-    //   };
-    //   const typeEachItem = () => {
-    //     if (charIndex <= totalLength) {
-    //       setTimeout(typeEachItem, 50);
-    //       charIndex++;
-    //       console.log(major, minor, patch);
-    //       type(arrIndex, charIndex, major, minor, patch);
-    //       CHANGELOG_LIST.appendChild(version);
-    //       CHANGELOG_LIST.appendChild(p);
-    //     }
-    //     if (charIndex === changes[arrIndex].length) {
-    //       charIndex = 0;
-    //       version.appendChild(p);
-    //       p.appendChild(space);
-    //       arrIndex++;
-    //     }
-    //     if (minor < 8) {
-    //       minor++;
-    //     }
-    //   };
-    //   typeEachItem();
-    // },
   },
 };
 </script>
@@ -143,6 +95,7 @@ $cyan: #00ffff;
 
 .changeLog {
   text-align: center;
+  transition: all 1s ease-in;
   width: 100%;
   z-index: 1;
   height: 100%;

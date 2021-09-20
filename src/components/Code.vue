@@ -14,8 +14,8 @@ export default {
   data() {
     return {
       codeLength: 5000,
-      numColumns: 100,
-      speedTypying: 80,
+      numColumns: 10,
+      speedTypying: 50,
       matrixCodeText: "",
       matrixCodeArray: [],
       consoleMessage: {
@@ -31,7 +31,7 @@ export default {
     };
   },
   mounted() {
-    this.launchCodeGenerator(this.speedTypying);
+    this.typeCode(this.speedTypying);
   },
   created() {
     this.getMatrixCode();
@@ -70,10 +70,6 @@ export default {
         this.matrixCodeArray[i].push(this.randomizeMatrixCode());
       }
     },
-    launchCodeGenerator(SPEED) {
-      // Third, we will generate the matrix code calling the typeCode function
-      this.typeCode(SPEED);
-    },
     randomizeStyles(element) {
       let randomOpacity = parseFloat(
         this.randomDecimalNumberRange(0.5, 1).toFixed(1)
@@ -89,10 +85,32 @@ export default {
       let paragraph;
       let i = 0; // ** => Code index character
       let j = 0; // ** => Column index
-      console.log(this.codeIndex)
+      // RANDOM STYLES FOR COLUMNS
+      COLS.forEach((col) => {
+        this.randomizeStyles(col);
+      });
+      // REMOVE COLUMNS
+      const removeColumn = (col_index) => {
+        const COLUMN = document.querySelector(
+          `.col-${col_index}-${this.codeIndex}`
+        );
+        COLUMN.style.opacity = 0;
+        COLUMN.innerHTML = "";
+        setTimeout(removeColumn, 2000);
+      };
+      // DISPLAY COLUMN
+      const displayColumn = (col_index) => {
+        const COLUMN = document.querySelector(
+          `.col-${col_index}-${this.codeIndex}`
+        );
+        COLUMN.style.opacity = 1;
+      };
+      // TYPE FUNCTION
       const type = (char_index, col_index) => {
         let text = String(...this.matrixCodeArray);
-        const COLUMN = document.querySelector(`.col-${col_index}-${this.codeIndex}`);
+        const COLUMN = document.querySelector(
+          `.col-${col_index}-${this.codeIndex}`
+        );
         if (char_index < this.codeLength) {
           paragraph = document.createElement("p");
           paragraph.className = "matrixCodeChar";
@@ -102,28 +120,13 @@ export default {
           COLUMN.appendChild(paragraph);
         }
       };
-      const removeColumn = (col_index) => {
-        const COLUMN = document.querySelector(`.col-${col_index}-${this.codeIndex}`);
-        COLUMN.style.opacity = 0;
-        COLUMN.innerHTML = "";
-        setTimeout(removeColumn, 2000);
-      };
-      const displayColumn = (col_index) => {
-        const COLUMN = document.querySelector(`.col-${col_index}-${this.codeIndex}`);
-        COLUMN.style.opacity = 1;
-      };
-      COLS.forEach((col) => {
-        this.randomizeStyles(col);
-      });
+      // TYPE EACH COLUMN
       const typeEachColumn = () => {
         if (j <= this.numColumns) {
           if (i <= this.codeLength) {
             displayColumn(j);
             type(i, j);
-            setTimeout(
-              typeEachColumn,
-              this.randomNumberRange(SPEED, SPEED * 2)
-            );
+            setTimeout(typeEachColumn, SPEED);
             i++;
             paragraph.style.opacity = "0";
           }

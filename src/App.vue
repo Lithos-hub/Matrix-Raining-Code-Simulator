@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <ChangeLog v-if="changeLog" />
-    <Code v-for="(item, i) in numOfCodeComponents" :key="i" :code-index="i" />
-    <div id="version" @mouseover="changeLog = !changeLog">
+    <Code v-for="(num, i) in numOfCodeComponents" :key="i" :code-index="i" />
+    <div id="version" @click="changeLog = !changeLog">
       {{ version }}
     </div>
   </div>
@@ -23,7 +23,7 @@ export default {
       minor: 8,
       patch: 0,
       changeLog: false,
-      numOfCodeComponents: 40,
+      numOfCodeComponents: 50,
     };
   },
   computed: {
@@ -72,5 +72,12 @@ $cyan: #00ffff;
   background: #151515;
   padding: 10px;
   opacity: 1;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    background: white;
+    color: black;
+    transition: 0.3s ease-in-out;
+  }
 }
 </style>

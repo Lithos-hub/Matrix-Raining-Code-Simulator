@@ -22,6 +22,11 @@ Version 0.8.0
 * The raining code is now an iterative component.
 * Infinite behavior has been added to the raining animation.
 
+Version 0.8.5
+
+* Improved the performance.
+* Added minor changes.
+
 ## Project setup
 ```
 npm install

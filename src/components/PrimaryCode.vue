@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div id="primary-code" class="container-fluid">
     <div
       :class="'col col-' + a + '-' + codeIndex"
       v-for="(col, a) in numColumns"
@@ -13,21 +13,11 @@ export default {
   props: ["codeIndex"],
   data() {
     return {
-      codeLength: 5000,
-      numColumns: 10,
-      speedTypying: 50,
+      codeLength: 100,
+      numColumns: 20,
+      speedTypying: 100,
       matrixCodeText: "",
       matrixCodeArray: [],
-      consoleMessage: {
-        cleaned: {
-          text: "%cCLEANED",
-          styles: "background:black; color: #3cff3c; font-size:18px",
-        },
-        error: {
-          text: "%cERROR",
-          styles: "background:black; color: #ff3c3c; font-size:18px",
-        },
-      },
     };
   },
   mounted() {
@@ -75,9 +65,9 @@ export default {
         this.randomDecimalNumberRange(0.5, 1).toFixed(1)
       );
       element.style.position = `fixed`;
-      element.style.fontSize = `${this.randomNumberRange(20, 35)}px`;
+      element.style.fontSize = `${this.randomNumberRange(14, 35)}px`;
       element.style.left = `${this.randomNumberRange(-100, 2000)}px`;
-      element.style.top = `${this.randomNumberRange(-100, 100)}px`;
+      element.style.top = `${this.randomNumberRange(-100, 0)}px`;
       element.style.opacity = randomOpacity;
     },
     typeCode(SPEED) {
@@ -94,8 +84,13 @@ export default {
         const COLUMN = document.querySelector(
           `.col-${col_index}-${this.codeIndex}`
         );
-        COLUMN.style.opacity = 0;
-        COLUMN.innerHTML = "";
+        if (COLUMN !== null) {
+          COLUMN.style.opacity = 0;
+          COLUMN.style.transition = "2s";
+          setTimeout(() => {
+            COLUMN.innerHTML = "";
+          }, 2000);
+        }
         setTimeout(removeColumn, 2000);
       };
       // DISPLAY COLUMN
@@ -122,15 +117,15 @@ export default {
       };
       // TYPE EACH COLUMN
       const typeEachColumn = () => {
-        if (j <= this.numColumns) {
-          if (i <= this.codeLength) {
+        if (j < this.numColumns) {
+          if (i < this.codeLength) {
             displayColumn(j);
             type(i, j);
-            setTimeout(typeEachColumn, SPEED);
             i++;
             paragraph.style.opacity = "0";
+            setTimeout(typeEachColumn, SPEED);
           }
-          if (i > this.randomNumberRange(50, 100)) {
+          if (i >= this.randomNumberRange(20, 50)) {
             removeColumn(j);
             j++;
             i = 0;
@@ -142,22 +137,22 @@ export default {
         }
       };
       typeEachColumn();
+      // setInterval(typeEachColumn, 5000);
     },
   },
 };
 </script>
 
 <style lang="scss">
-// SCSS variables
+@import "../assets/scss/variables.scss";
 
-$green: #00ff00;
-$cyan: #00ffff;
-
-.col {
-  height: 100%;
-  width: 25px;
+#primary-code {
   position: fixed;
   top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
 }
 
 .matrixCodeChar {
@@ -166,7 +161,7 @@ $cyan: #00ffff;
   color: $green;
   text-align: center;
   font-weight: bold;
-  animation: cyanToGreen 0.1s, fadeOut 2s ease;
+  animation: cyanToGreen 0.1s, fadeOut 2s;
 }
 
 @keyframes fadeOut {

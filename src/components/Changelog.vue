@@ -202,10 +202,9 @@ h2 {
 .list-item,
 .normal-text {
   font-family: "Consolas";
-  margin: 0 auto;
   color: $green;
-  font-size: 20px;
-  margin-block: 10px;
+  font-size: clamp(10px, 12px, 22px);
+  margin-block: 5px;
 }
 
 @keyframes fadeInLowOpacity {

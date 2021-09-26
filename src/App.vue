@@ -149,14 +149,14 @@ export default {
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 100px;
-  height: 100px;
+  width: clamp(80px, 75%, 100px);
+  height: clamp(80px, 75%, 100px);
   border: 1px solid $green;
   box-shadow: inset 0px 0px 5px black;
   cursor: pointer;
   background: transparent;
   z-index: 1;
-  transition: all 0.2s ease-in;
+  transition: 0.2s;
   clip-path: polygon(100% 0, 100% 0%, 100% 100%, 0% 100%);
   &:hover {
     #menu-text {
@@ -168,7 +168,7 @@ export default {
 #menu-text {
   transition: all 0.3s ease-out;
   position: fixed;
-  font-size: 30px;
+  font-size: clamp(18px, 75%, 30px);
   right: 20px;
   text-align: center;
   bottom: 0px;

@@ -51,7 +51,7 @@
   }
   
   .column {
-    width: 50%;
+    width: clamp(200px, 50%, 500px);
     margin: 0 auto;
   }
 

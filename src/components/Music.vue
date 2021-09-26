@@ -42,7 +42,7 @@ export default {
             if (i <= musicDuration && this.onPlay) {
               progressBar.style.width = `${i * progress}px`;
               i++;
-              setTimeout(onPlayingMusic, 100);
+              setTimeout(onPlayingMusic, 1000);
             } else {
               clearInterval(id);
             }

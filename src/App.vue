@@ -57,8 +57,8 @@ export default {
       minor: 9,
       patch: 0,
       changeLog: false,
-      numOfCodeComponents: 20,
-      numOfCodeComponents_2: 20,
+      numOfCodeComponents: 30,
+      numOfCodeComponents_2: 30,
     };
   },
   computed: {
@@ -113,6 +113,39 @@ export default {
   font-family: "Matrix";
 }
 
+#app {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #151020;
+}
+
+#version {
+  cursor: pointer;
+  font-family: "Consolas";
+  font-size: 12px;
+  color: $green;
+  position: fixed;
+  z-index: 3;
+  bottom: 0;
+  left: 0;
+  background: #151515;
+  padding: 10px;
+  opacity: 1;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    background: white;
+    color: black;
+    transition: 0.3s ease-in-out;
+  }
+}
+.menu-icon {
+  opacity: 0;
+}
+
 .code-component-2 {
   opacity: 0.5;
 }
@@ -131,8 +164,8 @@ export default {
 }
 
 #music-component {
-  border-inline: 1px solid $green;
-  border-top: 1px solid $green;
+  border-inline: 3px solid #1f8615;
+  border-top: 2px solid $green;
   width: 500px;
   height: 45px;
   background: linear-gradient(120deg, #303030, #151515);
@@ -149,8 +182,8 @@ export default {
   position: absolute;
   right: 0;
   bottom: 0;
-  width: clamp(80px, 75%, 100px);
-  height: clamp(80px, 75%, 100px);
+  width: clamp(20px, 50%, 75px);
+  height: clamp(20px, 50%, 75px);
   border: 1px solid $green;
   box-shadow: inset 0px 0px 5px black;
   cursor: pointer;

@@ -61,6 +61,9 @@ export default {
         " ____________________ Version 0.8.5: ____________________  ",
         " Improved the performance.",
         " Added minor changes.",
+        " ____________________ Version 0.9.0: ____________________  ",
+        " Music player added.",
+        " Improved the performance and added a secondary raining code layer.",
       ],
     };
   },
@@ -122,14 +125,6 @@ export default {
 <style lang="scss">
 @import "../assets/scss/variables.scss";
 @import "../assets/scss/app.scss";
-
-.follow {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: fadeInOut 5s ease;
-}
 
 .changeLog {
   text-align: center;
@@ -203,7 +198,7 @@ h2 {
 .normal-text {
   font-family: "Consolas";
   color: $green;
-  font-size: clamp(10px, 12px, 22px);
+  font-size: clamp(13px, 50%, 12px);
   margin-block: 5px;
 }
 

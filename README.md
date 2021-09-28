@@ -3,13 +3,20 @@
 
 This is a simulation of the raining code from the Matrix movie using Vue.js
 
-Version 0.5.0
+Version 0.9.0
 
-* Working raining code animation (with bugs and some crashes).
+* Music player added.
+* Improved the performance and added a secondary raining code layer.
 
-Version 0.6.0
+Version 0.8.5
 
-* Added individual class to each character
+* Improved the performance.
+* Added minor changes.
+
+Version 0.8.0 
+
+* The raining code is now an iterative component.
+* Infinite behavior has been added to the raining animation.
 
 Version 0.7.0
 
@@ -17,15 +24,14 @@ Version 0.7.0
 * Added changelog component.
 * Improved the raining code animation.
 
-Version 0.8.0 
+Version 0.6.0
 
-* The raining code is now an iterative component.
-* Infinite behavior has been added to the raining animation.
+* Added individual class to each character
 
-Version 0.8.5
+Version 0.5.0
 
-* Improved the performance.
-* Added minor changes.
+* Working raining code animation (with bugs and some crashes).
+
 
 ## Project setup
 ```

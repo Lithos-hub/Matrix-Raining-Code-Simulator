@@ -2,8 +2,10 @@
   <div id="menu">
     <h3 class="menu-title text-center fadeIn">Options</h3>
     <div class="menu-list fadeIn">
-      <p class="menu-item text-center fadeIn" @click="showMusicMenu">Play Music</p>
-      <p class="menu-item text-center fadeIn">Change colors</p>
+      <p class="menu-item text-center fadeIn" @click="showMusicMenu">
+        Play Music
+      </p>
+      <p class="menu-item text-center fadeIn">Change colors (soon)</p>
     </div>
   </div>
 </template>
@@ -16,8 +18,8 @@ export default {
   methods: {
     showMusicMenu() {
       this.$emit("show-music-menu");
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -37,11 +39,8 @@ export default {
 
 .menu-list {
   display: flex;
-  margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
 }
 
 .menu-item {

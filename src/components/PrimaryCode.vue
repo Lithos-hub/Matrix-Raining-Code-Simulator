@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       codeLength: 100,
-      numColumns: 20,
+      numColumns: 30,
       speedTypying: 100,
       matrixCodeText: "",
       matrixCodeArray: [],

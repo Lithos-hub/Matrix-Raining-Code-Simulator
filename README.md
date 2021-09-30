@@ -1,5 +1,5 @@
 # Matrix Raining Code Simulator
-![logo](https://user-images.githubusercontent.com/57297760/135144113-8ace96b8-dc42-4906-993d-585ebf2cc302.jpg)
+![logo](https://user-images.githubusercontent.com/57297760/135510724-bb938cff-a526-44a0-b448-43eefc968ff1.jpg)
 
 This app simulates the raining code from the Matrix movies. Here I use HTML, pure CSS, JavaScript and Vue. 
 

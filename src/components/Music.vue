@@ -1,17 +1,17 @@
 <template>
-<div>
-  <div id="interface">
-    <button id="close-button" @click="closeMenu">X</button>
-    <button id="play-button" @click="toggleMusic">
-      <img v-if="!onPlay" src="../assets/ico/play.svg" id="play-icon" />
-      <img v-if="onPlay" src="../assets/ico/pause.svg" id="pause-icon" />
-    </button>
-    <audio id="audio" src="../assets/mp3/soundtrack.mp3" loop preload />
-    <p class="music-timer">{{ trackTime }}</p>
-    <div id="progress-bar-cover"></div>
-  </div>
+  <div>
+    <div id="interface">
+      <button id="close-button" @click="closeMenu">X</button>
+      <button id="play-button" @click="toggleMusic">
+        <img v-if="!onPlay" src="../assets/ico/play.svg" id="play-icon" />
+        <img v-if="onPlay" src="../assets/ico/pause.svg" id="pause-icon" />
+      </button>
+      <audio id="audio" src="../assets/mp3/soundtrack.mp3" loop preload />
+      <p class="music-timer">{{ trackTime }}</p>
+      <div id="progress-bar-cover"></div>
+    </div>
     <div id="progress-bar"></div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -19,8 +19,8 @@ export default {
   data() {
     return {
       onPlay: false,
+      justPlayed: false,
       isPaused: Boolean,
-      progressed: 0,
       i: 0,
       musicDuration: 0,
       audioLength: 0,
@@ -40,7 +40,7 @@ export default {
         formattedTime = this.formatTime(this.audioLength);
       }
       if (isPaused) {
-        formattedTime = this.formatTime(this.progressed);
+        formattedTime = this.formatTime(this.audioLength);
       }
       return formattedTime;
     },
@@ -68,12 +68,29 @@ export default {
       let progress = maxWidth / musicDuration;
       let progressBar = document.querySelector("#progress-bar");
       let id;
-      setTimeout(() => {
-        if (this.onPlay) {
-          audio.play();
-          this.isPaused = audio.paused;
+      // The next code block will control if the toggle playing behavior in the audio.
+      // Each time the audio is played or stopped, the audio, the progress bar and the track time counter will continue where stopped.
+      if (this.onPlay) {
+        audio.play();
+        this.isPaused = audio.paused;
+        if (this.justPlayed) {
           id = setInterval(onPlayingMusic, 100);
+          const onPlayingMusic = () => {
+            if (this.onPlay && this.i <= this.audioLength) {
+              progressBar.style.width = `${10 + this.i * progress}px`;
+              progressBar.style.maxWidth = "400px";
+              progressBar.style.left = "100px";
+              if (this.i % 5 === 0) {
+                progressBar.style.marginLeft = `${this.i / 2}px`;
+              }
+              this.i++;
+              setTimeout(onPlayingMusic, 1000);
+            }
+          };
+          onPlayingMusic();
+        } else {
           this.audioLength = audio.duration;
+          id = setInterval(onPlayingMusic, 100);
           const onPlayingMusic = () => {
             if (this.onPlay && this.i <= musicDuration) {
               progressBar.style.width = `${10 + this.i * progress}px`;
@@ -87,17 +104,19 @@ export default {
             }
           };
           onPlayingMusic();
-        } else {
-          audio.pause();
-          this.isPaused = audio.paused;
-          this.progressed = this.audioLength - this.i;
-          progressBar.style.width = `${this.i * progress}px`;
         }
-        if (this.i === musicDuration) {
-          this.i = 0;
-          clearInterval(id);
-        }
-      }, 100);
+      } else {
+        this.justPlayed = true;
+        audio.pause();
+        this.isPaused = audio.paused;
+        progressBar.style.width = `${10 + this.i * progress}px`;
+        progressBar.style.maxWidth = "400px";
+        progressBar.style.left = "100px";
+      }
+      if (this.i === musicDuration) {
+        this.i = 0;
+        clearInterval(id);
+      }
     },
   },
 };

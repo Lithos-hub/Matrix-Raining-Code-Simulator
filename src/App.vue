@@ -3,12 +3,14 @@
     <ChangeLog v-if="changeLog" @close-changelog="closeChangelog" />
     <PrimaryCode
       class="code-component"
+      :custom-char-class="charClass"
       v-for="(num, i) in numOfCodeComponents"
       :key="i + 'A'"
       :code-index="i"
     />
     <SecondaryCode
       class="code-component-2"
+      :custom-char-class="charClass"
       v-for="(num, i) in numOfCodeComponents_2"
       :key="i + 'B'"
       :code-index="i"
@@ -24,12 +26,20 @@
       v-if="menu"
       class="expanded-menu"
       @show-music-menu="showMusicMenu"
+      @show-colors-menu="showColorsMenu"
     />
     <Music
       id="music-component"
       v-if="onPlayMusic"
       class="music-player"
       @close-music-menu="closeMusicMenu"
+    />
+    <Colors
+      id="colors-component"
+      v-if="onChangeColors"
+      class="colors-menu"
+      @close-colors-menu="closeColorsMenu"
+      @change-color="changeColor"
     />
   </div>
 </template>
@@ -40,6 +50,7 @@ import SecondaryCode from "@/components/SecondaryCode.vue";
 import PrimaryCode from "@/components/PrimaryCode.vue";
 import Music from "@/components/Music.vue";
 import Menu from "@/components/Menu.vue";
+import Colors from "@/components/Colors.vue";
 export default {
   components: {
     PrimaryCode,
@@ -47,18 +58,21 @@ export default {
     ChangeLog,
     Music,
     Menu,
+    Colors,
   },
   name: "App",
   data() {
     return {
       menu: false,
       onPlayMusic: false,
+      onChangeColors: false,
       major: 0,
       minor: 9,
       patch: 0,
       changeLog: false,
       numOfCodeComponents: 30,
       numOfCodeComponents_2: 30,
+      charClass: "greenChars",
     };
   },
   computed: {
@@ -75,9 +89,13 @@ export default {
     },
     closeMenu() {
       let menu = document.querySelector("#menu");
+      let colorsMenu = document.querySelector("#colors-component");
       window.addEventListener("click", (e) => {
-        if (!menu.contains(e.target)) {
+        if (menu !== null && !menu.contains(e.target)) {
           this.menu = false;
+        }
+        if (colorsMenu !== null && !colorsMenu.contains(e.target)) {
+          this.closeColorsMenu()
         }
       });
     },
@@ -85,17 +103,36 @@ export default {
       this.onPlayMusic = true;
       setTimeout(() => {
         let musicComponent = document.querySelector("#music-component");
-        musicComponent.style.transition = "1s ease-out";
+        musicComponent.style.transition = "0.3s ease-out";
         musicComponent.style.bottom = "0px";
       }, 100);
     },
     closeMusicMenu() {
       let musicComponent = document.querySelector("#music-component");
-      musicComponent.style.transition = "1s ease-out";
+      musicComponent.style.transition = "0.3s ease-out";
       musicComponent.style.bottom = "-100px";
       setTimeout(() => {
         this.onPlayMusic = false;
       }, 1000);
+    },
+    showColorsMenu() {
+      this.onChangeColors = true;
+      setTimeout(() => {
+        let musicComponent = document.querySelector("#colors-component");
+        musicComponent.style.transition = "0.3s ease-out";
+        musicComponent.style.bottom = "0px";
+      }, 100);
+    },
+    closeColorsMenu() {
+      let musicComponent = document.querySelector("#colors-component");
+      musicComponent.style.transition = "0.3s ease-out";
+      musicComponent.style.bottom = "-100px";
+      setTimeout(() => {
+        this.onChangeColors = true;
+      }, 1000);
+    },
+    changeColor(customClass) {
+      this.charClass = customClass;
     },
   },
 };
@@ -176,6 +213,22 @@ export default {
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
+}
+
+#colors-component {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  width: 550px;
+  height: 2em;
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  background: linear-gradient(120deg, #303030, #151515);
+  border-left: 2px solid #7b7b7b;
+  border-right: 2px solid #7b7b7b;
+  transform: translate(-50%, 0);
+  z-index: 9999;
+  padding: 2em;
 }
 
 #menu {

@@ -15,6 +15,7 @@
 
   .row {
     display: flex;
+    flex-wrap: nowrap;
   }
   
   .column {
@@ -24,4 +25,148 @@
 
   .text-center {
     text-align: center;
+  }
+
+  .greenChars {
+    margin: 10px;
+    padding: 0;
+    color: $green;
+    text-align: center;
+    font-weight: bold;
+    animation: greenColorTransition 0.1s, fadeOut 2s;
+  }
+
+  .redChars {
+    margin: 10px;
+    padding: 0;
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    animation: redColorTransition 0.1s, fadeOut 2s;
+  }
+
+  .blueChars {
+    margin: 10px;
+    padding: 0;
+    color: rgb(62, 62, 255);
+    text-align: center;
+    font-weight: bold;
+    animation: blueColorTransition 0.1s, fadeOut 2s;
+  }
+
+  .yellowChars {
+    margin: 10px;
+    padding: 0;
+    color: yellow;
+    text-align: center;
+    font-weight: bold;
+    animation: yellowColorTransition 0.1s, fadeOut 2s;
+  }
+
+  .orangeChars {
+    margin: 10px;
+    padding: 0;
+    color: orange;
+    text-align: center;
+    font-weight: bold;
+    animation: orangeColorTransition 0.1s, fadeOut 2s;
+  }
+
+  .cyanChars {
+    margin: 10px;
+    padding: 0;
+    color: cyan;
+    text-align: center;
+    font-weight: bold;
+    animation: cyanColorTransition 0.1s, fadeOut 2s;
+  }
+
+  .whiteChars {
+    margin: 10px;
+    padding: 0;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    animation: whiteColorTransition 0.1s, fadeOut 2s;
+  }
+    
+  @keyframes fadeOut {
+    from {
+      opacity: initial;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes greenColorTransition {
+    from {
+      color: $cyan;
+    }
+    to {
+      color: $green;
+    }
+  }
+
+  @keyframes redColorTransition {
+    from {
+      color: pink;
+    }
+    to {
+      color: red;
+    }
+  }
+
+  @keyframes blueColorTransition {
+    from {
+      color: skyblue;
+    }
+    to {
+      color: blue;
+    }
+  }
+
+  @keyframes yellowColorTransition {
+    from {
+      color: bisque;
+    }
+    to {
+      color: yellow;
+    }
+  }
+
+  @keyframes orangeColorTransition {
+    from {
+      color: peachpuff;
+    }
+    to {
+      color: orange;
+    }
+  }
+
+  @keyframes cyanColorTransition {
+    from {
+      color: white;
+    }
+    to {
+      color: $cyan;
+    }
+  }
+
+  @keyframes whiteColorTransition {
+    from {
+      color: $cyan;
+    }
+    to {
+      color: white;
+    }
   }

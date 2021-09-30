@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  props: ["codeIndex"],
+  props: ["codeIndex", "custom-char-class"],
   data() {
     return {
       codeLength: 100,
@@ -84,7 +84,6 @@ export default {
         const COLUMN = document.querySelector(
           `.col-secondary-${col_index}-${this.codeIndex}`
         );
-        // TODO: null error en la consola. Corregir
         if (COLUMN !== null) {
           COLUMN.style.opacity = 0;
           setTimeout(() => {
@@ -108,7 +107,7 @@ export default {
         );
         if (char_index < this.codeLength) {
           paragraph = document.createElement("p");
-          paragraph.className = "secondary-matrixCodeChar";
+          paragraph.className = this.customCharClass;
           paragraph.innerHTML = `${text.charAt(
             this.randomNumber(text.length)
           )}`;
@@ -154,41 +153,5 @@ export default {
   z-index: 0;
   width: 100%;
   height: 100%;
-}
-
-.secondary-matrixCodeChar {
-  margin: 10px;
-  padding: 0;
-  color: $green;
-  text-align: center;
-  font-weight: bold;
-  animation: cyanToGreen 0.1s, fadeOut 4s ease;
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: initial;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes cyanToGreen {
-  from {
-    color: $cyan;
-  }
-  to {
-    color: $green;
-  }
 }
 </style>

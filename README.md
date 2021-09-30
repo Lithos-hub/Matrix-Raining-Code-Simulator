@@ -3,6 +3,11 @@
 
 This is a simulation of the raining code from the Matrix movie using Vue.js
 
+Version 1.0.0
+
+* Finished and improved the music player.
+* Added a new menu component to change the code color.
+
 Version 0.9.0
 
 * Music player added.

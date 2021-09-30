@@ -5,7 +5,9 @@
       <p class="menu-item text-center fadeIn" @click="showMusicMenu">
         Play Music
       </p>
-      <p class="menu-item text-center fadeIn">Change colors (soon)</p>
+      <p class="menu-item text-center fadeIn" @click="showColorsMenu">
+        Change colors
+      </p>
     </div>
   </div>
 </template>
@@ -18,6 +20,9 @@ export default {
   methods: {
     showMusicMenu() {
       this.$emit("show-music-menu");
+    },
+    showColorsMenu() {
+      this.$emit("show-colors-menu");
     },
   },
 };

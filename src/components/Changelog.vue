@@ -64,6 +64,9 @@ export default {
         " ____________________ Version 0.9.0: ____________________  ",
         " Music player added.",
         " Improved the performance and added a secondary raining code layer.",
+        " ____________________ Version 1.0.0: ____________________  ",
+        " Finished and improved the music player.",
+        " Added a menu to change the code color.",
       ],
     };
   },

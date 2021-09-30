@@ -151,12 +151,14 @@ export default {
 }
 
 #app {
-  position: absolute;
+  position: fixed;
+  filter: contrast(1.5);
+  filter: brightness(1.5);
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: #151020;
+  background-color: #050505;
 }
 
 #version {

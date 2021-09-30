@@ -14,8 +14,8 @@ export default {
   data() {
     return {
       codeLength: 100,
-      numColumns: 30,
-      speedTypying: 100,
+      numColumns: 5,
+      speedTypying: 30,
       matrixCodeText: "",
       matrixCodeArray: [],
     };
@@ -25,6 +25,11 @@ export default {
   },
   created() {
     this.getMatrixCode();
+  },
+  computed: {
+    width() {
+      return window.screen.width;
+    },
   },
   methods: {
     randomNumber(length) {
@@ -66,7 +71,7 @@ export default {
       );
       element.style.position = `fixed`;
       element.style.fontSize = `${this.randomNumberRange(14, 35)}px`;
-      element.style.left = `${this.randomNumberRange(-100, 2000)}px`;
+      element.style.left = `${this.randomNumberRange(-100, this.width + 100)}px`;
       element.style.top = `${this.randomNumberRange(-100, 0)}px`;
       element.style.opacity = randomOpacity;
     },

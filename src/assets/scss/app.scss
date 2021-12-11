@@ -33,51 +33,57 @@
     color: $green;
     text-align: center;
     font-weight: bold;
+    text-shadow: 0px 0px 2px white, 0px 0px 10px #a1e4a1, 0px 0px 20px #43b843;
     animation: greenColorTransition 0.1s, fadeOut 2s;
   }
 
   .redChars {
     margin: 10px;
     padding: 0;
-    color: red;
+    color: #ff8282;
     text-align: center;
     font-weight: bold;
+    text-shadow: 0px 0px 2px white, 0px 0px 10px #e4a1a1, 0px 0px 20px #b84343;
     animation: redColorTransition 0.1s, fadeOut 2s;
   }
 
   .blueChars {
     margin: 10px;
     padding: 0;
-    color: rgb(62, 62, 255);
+    color: #3e3eff;
     text-align: center;
     font-weight: bold;
+    text-shadow: 0px 0px 2px white, 0px 0px 10px #a2a1e4, 0px 0px 20px #4b43b8;
     animation: blueColorTransition 0.1s, fadeOut 2s;
   }
 
   .yellowChars {
     margin: 10px;
     padding: 0;
-    color: yellow;
+    color: #fffd82;
     text-align: center;
     font-weight: bold;
+    text-shadow: 0px 0px 2px white, 0px 0px 10px #e4daa1, 0px 0px 20px #b8b643;
     animation: yellowColorTransition 0.1s, fadeOut 2s;
   }
 
   .orangeChars {
     margin: 10px;
     padding: 0;
-    color: orange;
+    color: #ffb082;
     text-align: center;
     font-weight: bold;
+    text-shadow: 0px 0px 2px white, 0px 0px 10px #e4bfa1, 0px 0px 20px #b87843;
     animation: orangeColorTransition 0.1s, fadeOut 2s;
   }
 
   .cyanChars {
     margin: 10px;
     padding: 0;
-    color: cyan;
+    color: #82fff9;
     text-align: center;
     font-weight: bold;
+    text-shadow: 0px 0px 2px white, 0px 0px 10px #a1e2e4, 0px 0px 20px #43b8ae;
     animation: cyanColorTransition 0.1s, fadeOut 2s;
   }
 
@@ -87,6 +93,7 @@
     color: white;
     text-align: center;
     font-weight: bold;
+    text-shadow: 0px 0px 2px white, 0px 0px 10px #ffffff, 0px 0px 20px #ffffff;
     animation: whiteColorTransition 0.1s, fadeOut 2s;
   }
     
@@ -122,7 +129,7 @@
       color: pink;
     }
     to {
-      color: red;
+      color: #ff8282;
     }
   }
 
@@ -131,7 +138,7 @@
       color: skyblue;
     }
     to {
-      color: blue;
+      color: #3e3eff;
     }
   }
 
@@ -140,7 +147,7 @@
       color: bisque;
     }
     to {
-      color: yellow;
+      color: #fffd82;
     }
   }
 
@@ -149,7 +156,7 @@
       color: peachpuff;
     }
     to {
-      color: orange;
+      color: #ffb082;
     }
   }
 

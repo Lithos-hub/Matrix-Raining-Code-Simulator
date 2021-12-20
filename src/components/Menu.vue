@@ -2,7 +2,9 @@
   <div id="menu">
     <h3 class="menu-title text-center fadeIn">Options</h3>
     <div class="menu-list fadeIn">
-      <p class="menu-item text-center fadeIn" @click="showMusicMenu">Play Music</p>
+      <p class="menu-item text-center fadeIn" @click="showMusicMenu">
+        Play Music
+      </p>
       <p class="menu-item text-center fadeIn">Change colors</p>
     </div>
   </div>
@@ -16,8 +18,8 @@ export default {
   methods: {
     showMusicMenu() {
       this.$emit("show-music-menu");
-    }
-  }
+    },
+  },
 };
 </script>
 

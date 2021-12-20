@@ -5,7 +5,9 @@
       <p class="menu-item text-center fadeIn" @click="showMusicMenu">
         Play Music
       </p>
-      <p class="menu-item text-center fadeIn">Change colors</p>
+      <p class="menu-item text-center fadeIn" @click="showColorsMenu">
+        Change colors
+      </p>
     </div>
   </div>
 </template>
@@ -18,6 +20,9 @@ export default {
   methods: {
     showMusicMenu() {
       this.$emit("show-music-menu");
+    },
+    showColorsMenu() {
+      this.$emit("show-colors-menu");
     },
   },
 };
@@ -39,11 +44,8 @@ export default {
 
 .menu-list {
   display: flex;
-  margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
 }
 
 .menu-item {

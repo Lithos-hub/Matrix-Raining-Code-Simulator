@@ -1,15 +1,29 @@
-# Matrix Raining Code
-![logo](https://user-images.githubusercontent.com/57297760/133966291-a3c14b2d-f468-4721-9a02-467298b3465d.jpg)
+# Matrix Raining Code Simulator
+![logo](https://user-images.githubusercontent.com/57297760/135510724-bb938cff-a526-44a0-b448-43eefc968ff1.jpg)
 
-This is a simulation of the raining code from the Matrix movie using Vue.js
+This app simulates the raining code from the Matrix movies. Here I use HTML, pure CSS, JavaScript and Vue. 
 
-Version 0.5.0
+The app includes some features like a music player and a menu to change the code color.
 
-* Working raining code animation (with bugs and some crashes).
+Version 1.0.0
 
-Version 0.6.0
+* Finished and improved the music player.
+* Added a new menu component to change the code color.
 
-* Added individual class to each character
+Version 0.9.0
+
+* Music player added.
+* Improved the performance and added a secondary raining code layer.
+
+Version 0.8.5
+
+* Improved the performance.
+* Added minor changes.
+
+Version 0.8.0 
+
+* The raining code is now an iterative component.
+* Infinite behavior has been added to the raining animation.
 
 Version 0.7.0
 
@@ -17,15 +31,14 @@ Version 0.7.0
 * Added changelog component.
 * Improved the raining code animation.
 
-Version 0.8.0 
+Version 0.6.0
 
-* The raining code is now an iterative component.
-* Infinite behavior has been added to the raining animation.
+* Added individual class to each character
 
-Version 0.8.5
+Version 0.5.0
 
-* Improved the performance.
-* Added minor changes.
+* Working raining code animation (with bugs and some crashes).
+
 
 ## Project setup
 ```

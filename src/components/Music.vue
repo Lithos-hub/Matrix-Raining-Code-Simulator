@@ -1,11 +1,15 @@
 <template>
-  <div id="interface">
-    <button id="close-button" @click="closeMenu">X</button>
-    <button id="play-button" @click="playMusic">
-      <img v-if="!onPlay" src="../assets/ico/play.svg" id="play-icon" />
-      <img v-if="onPlay" src="../assets/ico/pause.svg" id="pause-icon" />
-    </button>
-    <audio id="audio" src="../assets/mp3/soundtrack.mp3" />
+  <div>
+    <div id="interface">
+      <button id="close-button" @click="closeMenu">X</button>
+      <button id="play-button" @click="toggleMusic">
+        <img v-if="!onPlay" src="../assets/ico/play.svg" id="play-icon" />
+        <img v-if="onPlay" src="../assets/ico/pause.svg" id="pause-icon" />
+      </button>
+      <audio id="audio" src="../assets/mp3/soundtrack.mp3" loop preload />
+      <p class="music-timer">{{ trackTime }}</p>
+      <div id="progress-bar-cover"></div>
+    </div>
     <div id="progress-bar"></div>
   </div>
 </template>
@@ -15,43 +19,104 @@ export default {
   data() {
     return {
       onPlay: false,
-      onPaused: true,
-      progressed: 0,
+      justPlayed: false,
+      isPaused: Boolean,
+      i: 0,
+      musicDuration: 0,
+      audioLength: 0,
     };
+  },
+  computed: {
+    // eslint-disable-next-line vue/return-in-computed-property
+    trackTime() {
+      let isPaused = this.isPaused;
+      let formattedTime;
+      let i = 0;
+      if (!isPaused && this.audioLength > i) {
+        // eslint-disable-next-line vue/no-async-in-computed-properties
+        setTimeout(() => {
+          this.audioLength--;
+        }, 1000);
+        formattedTime = this.formatTime(this.audioLength);
+      }
+      if (isPaused) {
+        formattedTime = this.formatTime(this.audioLength);
+      }
+      return formattedTime;
+    },
   },
   methods: {
     closeMenu() {
       this.$emit("close-music-menu");
     },
-    playMusic() {
+    formatTime(time) {
+      let minutes = Math.floor(time / 60);
+      let seconds = Math.floor(time % 60);
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+      if (seconds < 10) {
+        seconds = "0" + seconds;
+      }
+      return minutes + ":" + seconds;
+    },
+    toggleMusic() {
       this.onPlay = !this.onPlay;
-      this.onPaused = !this.onPaused;
       let audio = document.querySelector("audio");
-      let musicDuration = 350;
+      let musicDuration = audio.duration;
       let maxWidth = 400;
       let progress = maxWidth / musicDuration;
       let progressBar = document.querySelector("#progress-bar");
       let id;
-      let i = 0;
-      progressBar.style.opacity = "1";
-      setTimeout(() => {
+      // The next code block will control if the toggle playing behavior in the audio.
+      // Each time the audio is played or stopped, the audio, the progress bar and the track time counter will continue where stopped.
+      if (this.onPlay) {
         audio.play();
-        if (this.onPlay) {
-          id = setInterval(onPlayingMusic, 1000);
+        this.isPaused = audio.paused;
+        if (this.justPlayed) {
+          id = setInterval(onPlayingMusic, 100);
           const onPlayingMusic = () => {
-            if (i <= musicDuration && this.onPlay) {
-              progressBar.style.width = `${i * progress}px`;
-              i++;
+            if (this.onPlay && this.i <= this.audioLength) {
+              progressBar.style.width = `${10 + this.i * progress}px`;
+              progressBar.style.maxWidth = "400px";
+              progressBar.style.left = "100px";
+              if (this.i % 5 === 0) {
+                progressBar.style.marginLeft = `${this.i / 2}px`;
+              }
+              this.i++;
               setTimeout(onPlayingMusic, 1000);
-            } else {
-              clearInterval(id);
             }
           };
           onPlayingMusic();
         } else {
-          progressBar.style.width = `${this.progressed}px`;
+          this.audioLength = audio.duration;
+          id = setInterval(onPlayingMusic, 100);
+          const onPlayingMusic = () => {
+            if (this.onPlay && this.i <= musicDuration) {
+              progressBar.style.width = `${10 + this.i * progress}px`;
+              progressBar.style.maxWidth = "400px";
+              progressBar.style.left = "100px";
+              if (this.i % 5 === 0) {
+                progressBar.style.marginLeft = `${this.i / 2}px`;
+              }
+              this.i++;
+              setTimeout(onPlayingMusic, 1000);
+            }
+          };
+          onPlayingMusic();
         }
-      }, 500);
+      } else {
+        this.justPlayed = true;
+        audio.pause();
+        this.isPaused = audio.paused;
+        progressBar.style.width = `${10 + this.i * progress}px`;
+        progressBar.style.maxWidth = "400px";
+        progressBar.style.left = "100px";
+      }
+      if (this.i === musicDuration) {
+        this.i = 0;
+        clearInterval(id);
+      }
     },
   },
 };
@@ -62,10 +127,21 @@ export default {
 @import "../assets/scss/app.scss";
 
 #interface {
-  z-index: 3;
+  z-index: 1;
+}
+
+.music-timer {
+  z-index: 2;
+  position: absolute;
+  left: 10%;
+  bottom: 0;
+  font-size: 14px;
+  color: $green;
+  font-family: "Consolas";
 }
 
 #play-button {
+  z-index: 2;
   cursor: pointer;
   border-radius: 50%;
   width: 40px;
@@ -80,6 +156,7 @@ export default {
 }
 
 #pause-icon {
+  z-index: 2;
   cursor: pointer;
   width: 20px;
   height: 20px;
@@ -93,6 +170,7 @@ export default {
 }
 
 #pause-icon {
+  z-index: 2;
   position: relative;
   left: 40%;
   top: 35%;
@@ -100,6 +178,7 @@ export default {
 }
 
 #play-icon {
+  z-index: 2;
   position: relative;
   left: 50%;
   top: 40%;
@@ -107,17 +186,25 @@ export default {
 }
 
 #progress-bar {
-  opacity: 0;
   position: absolute;
+  opacity: 1;
   float: left;
-  left: 52%;
   top: 50%;
   transform: translate(-50%, -50%);
   background: white;
-  max-width: 400px;
   height: 5px;
   border-radius: 10px;
   box-shadow: 0px 0px 2px white, 0px 0px 10px $green;
+  z-index: 0;
+}
+
+#progress-bar-cover {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  width: 100px;
+  height: 100%;
+  background: linear-gradient(120deg, #303030 5%, #151515);
 }
 
 #close-button {

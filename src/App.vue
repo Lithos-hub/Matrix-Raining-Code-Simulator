@@ -3,12 +3,14 @@
     <ChangeLog v-if="changeLog" @close-changelog="closeChangelog" />
     <PrimaryCode
       class="code-component"
+      :custom-char-class="charClass"
       v-for="(num, i) in numOfCodeComponents"
       :key="i + 'A'"
       :code-index="i"
     />
     <SecondaryCode
       class="code-component-2"
+      :custom-char-class="charClass"
       v-for="(num, i) in numOfCodeComponents_2"
       :key="i + 'B'"
       :code-index="i"
@@ -24,12 +26,20 @@
       v-if="menu"
       class="expanded-menu"
       @show-music-menu="showMusicMenu"
+      @show-colors-menu="showColorsMenu"
     />
     <Music
       id="music-component"
       v-if="onPlayMusic"
       class="music-player"
       @close-music-menu="closeMusicMenu"
+    />
+    <Colors
+      id="colors-component"
+      v-if="onChangeColors"
+      class="colors-menu"
+      @close-colors-menu="closeColorsMenu"
+      @change-color="changeColor"
     />
   </div>
 </template>
@@ -40,6 +50,7 @@ import SecondaryCode from "@/components/SecondaryCode.vue";
 import PrimaryCode from "@/components/PrimaryCode.vue";
 import Music from "@/components/Music.vue";
 import Menu from "@/components/Menu.vue";
+import Colors from "@/components/Colors.vue";
 export default {
   components: {
     PrimaryCode,
@@ -47,18 +58,21 @@ export default {
     ChangeLog,
     Music,
     Menu,
+    Colors,
   },
   name: "App",
   data() {
     return {
       menu: false,
       onPlayMusic: false,
-      major: 0,
-      minor: 9,
+      onChangeColors: false,
+      major: 1,
+      minor: 0,
       patch: 0,
       changeLog: false,
-      numOfCodeComponents: 20,
-      numOfCodeComponents_2: 20,
+      numOfCodeComponents: 30,
+      numOfCodeComponents_2: 30,
+      charClass: "greenChars",
     };
   },
   computed: {
@@ -75,9 +89,13 @@ export default {
     },
     closeMenu() {
       let menu = document.querySelector("#menu");
+      let colorsMenu = document.querySelector("#colors-component");
       window.addEventListener("click", (e) => {
-        if (!menu.contains(e.target)) {
+        if (menu !== null && !menu.contains(e.target)) {
           this.menu = false;
+        }
+        if (colorsMenu !== null && !colorsMenu.contains(e.target)) {
+          this.closeColorsMenu();
         }
       });
     },
@@ -85,17 +103,36 @@ export default {
       this.onPlayMusic = true;
       setTimeout(() => {
         let musicComponent = document.querySelector("#music-component");
-        musicComponent.style.transition = "1s ease-out";
+        musicComponent.style.transition = "0.3s ease-out";
         musicComponent.style.bottom = "0px";
       }, 100);
     },
     closeMusicMenu() {
       let musicComponent = document.querySelector("#music-component");
-      musicComponent.style.transition = "1s ease-out";
+      musicComponent.style.transition = "0.3s ease-out";
       musicComponent.style.bottom = "-100px";
       setTimeout(() => {
         this.onPlayMusic = false;
       }, 1000);
+    },
+    showColorsMenu() {
+      this.onChangeColors = true;
+      setTimeout(() => {
+        let musicComponent = document.querySelector("#colors-component");
+        musicComponent.style.transition = "0.3s ease-out";
+        musicComponent.style.bottom = "0px";
+      }, 100);
+    },
+    closeColorsMenu() {
+      let musicComponent = document.querySelector("#colors-component");
+      musicComponent.style.transition = "0.3s ease-out";
+      musicComponent.style.bottom = "-100px";
+      setTimeout(() => {
+        this.onChangeColors = true;
+      }, 1000);
+    },
+    changeColor(customClass) {
+      this.charClass = customClass;
     },
   },
 };
@@ -111,6 +148,41 @@ export default {
 
 * {
   font-family: "Matrix";
+}
+
+#app {
+  position: fixed;
+  filter: contrast(1.5);
+  filter: brightness(1.5);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #050505;
+}
+
+#version {
+  cursor: pointer;
+  font-family: "Consolas";
+  font-size: 12px;
+  color: $green;
+  position: fixed;
+  z-index: 3;
+  bottom: 0;
+  left: 0;
+  background: #151515;
+  padding: 10px;
+  opacity: 1;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    background: white;
+    color: black;
+    transition: 0.3s ease-in-out;
+  }
+}
+.menu-icon {
+  opacity: 0;
 }
 
 .code-component-2 {
@@ -131,8 +203,8 @@ export default {
 }
 
 #music-component {
-  border-inline: 1px solid $green;
-  border-top: 1px solid $green;
+  border-inline: 3px solid #1f8615;
+  border-top: 2px solid $green;
   width: 500px;
   height: 45px;
   background: linear-gradient(120deg, #303030, #151515);
@@ -145,12 +217,28 @@ export default {
   z-index: 2;
 }
 
+#colors-component {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  width: 550px;
+  height: 2em;
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  background: linear-gradient(120deg, #303030, #151515);
+  border-left: 2px solid #7b7b7b;
+  border-right: 2px solid #7b7b7b;
+  transform: translate(-50%, 0);
+  z-index: 9999;
+  padding: 2em;
+}
+
 #menu {
   position: absolute;
   right: 0;
   bottom: 0;
-  width: clamp(80px, 75%, 100px);
-  height: clamp(80px, 75%, 100px);
+  width: clamp(20px, 50%, 75px);
+  height: clamp(20px, 50%, 75px);
   border: 1px solid $green;
   box-shadow: inset 0px 0px 5px black;
   cursor: pointer;

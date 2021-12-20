@@ -1,36 +1,3 @@
-#app {
-    position: absolute;
-    // overflow: hidden;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: #151020;
-  }
-  
-  #version {
-    cursor: pointer;
-    font-family: "Consolas";
-    font-size: 18px;
-    color: $green;
-    position: fixed;
-    z-index: 3;
-    bottom: 0;
-    left: 0;
-    background: #151515;
-    padding: 10px;
-    opacity: 1;
-    transition: 0.3s ease-in-out;
-  
-    &:hover {
-      background: white;
-      color: black;
-      transition: 0.3s ease-in-out;
-    }
-  }
-  .menu-icon {
-    opacity: 0;
-  }
 
   .col {
     height: 100%;
@@ -48,6 +15,7 @@
 
   .row {
     display: flex;
+    flex-wrap: nowrap;
   }
   
   .column {
@@ -57,4 +25,155 @@
 
   .text-center {
     text-align: center;
+  }
+
+  .greenChars {
+    margin: 10px;
+    padding: 0;
+    color: $green;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0px 0px 2px white, 0px 0px 10px #a1e4a1, 0px 0px 20px #43b843;
+    animation: greenColorTransition 0.1s, fadeOut 2s;
+  }
+
+  .redChars {
+    margin: 10px;
+    padding: 0;
+    color: #ff8282;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0px 0px 2px white, 0px 0px 10px #e4a1a1, 0px 0px 20px #b84343;
+    animation: redColorTransition 0.1s, fadeOut 2s;
+  }
+
+  .blueChars {
+    margin: 10px;
+    padding: 0;
+    color: #3e3eff;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0px 0px 2px white, 0px 0px 10px #a2a1e4, 0px 0px 20px #4b43b8;
+    animation: blueColorTransition 0.1s, fadeOut 2s;
+  }
+
+  .yellowChars {
+    margin: 10px;
+    padding: 0;
+    color: #fffd82;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0px 0px 2px white, 0px 0px 10px #e4daa1, 0px 0px 20px #b8b643;
+    animation: yellowColorTransition 0.1s, fadeOut 2s;
+  }
+
+  .orangeChars {
+    margin: 10px;
+    padding: 0;
+    color: #ffb082;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0px 0px 2px white, 0px 0px 10px #e4bfa1, 0px 0px 20px #b87843;
+    animation: orangeColorTransition 0.1s, fadeOut 2s;
+  }
+
+  .cyanChars {
+    margin: 10px;
+    padding: 0;
+    color: #82fff9;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0px 0px 2px white, 0px 0px 10px #a1e2e4, 0px 0px 20px #43b8ae;
+    animation: cyanColorTransition 0.1s, fadeOut 2s;
+  }
+
+  .whiteChars {
+    margin: 10px;
+    padding: 0;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 0px 0px 2px white, 0px 0px 10px #ffffff, 0px 0px 20px #ffffff;
+    animation: whiteColorTransition 0.1s, fadeOut 2s;
+  }
+    
+  @keyframes fadeOut {
+    from {
+      opacity: initial;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes greenColorTransition {
+    from {
+      color: $cyan;
+    }
+    to {
+      color: $green;
+    }
+  }
+
+  @keyframes redColorTransition {
+    from {
+      color: pink;
+    }
+    to {
+      color: #ff8282;
+    }
+  }
+
+  @keyframes blueColorTransition {
+    from {
+      color: skyblue;
+    }
+    to {
+      color: #3e3eff;
+    }
+  }
+
+  @keyframes yellowColorTransition {
+    from {
+      color: bisque;
+    }
+    to {
+      color: #fffd82;
+    }
+  }
+
+  @keyframes orangeColorTransition {
+    from {
+      color: peachpuff;
+    }
+    to {
+      color: #ffb082;
+    }
+  }
+
+  @keyframes cyanColorTransition {
+    from {
+      color: white;
+    }
+    to {
+      color: $cyan;
+    }
+  }
+
+  @keyframes whiteColorTransition {
+    from {
+      color: $cyan;
+    }
+    to {
+      color: white;
+    }
   }
